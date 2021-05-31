@@ -1,0 +1,300 @@
+2021-05-21 16:43:56 [scrapy.utils.log] INFO: Scrapy 2.2.0 started (bot: bfipricecrawler)
+2021-05-21 16:43:56 [scrapy.utils.log] INFO: Versions: lxml 4.6.3.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 21.2.0, Python 3.8.8 (default, Feb 24 2021, 21:46:12) - [GCC 7.3.0], pyOpenSSL 20.0.1 (OpenSSL 1.1.1k  25 Mar 2021), cryptography 3.4.7, Platform Linux-5.4.0-73-generic-x86_64-with-glibc2.10
+2021-05-21 16:43:56 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.epollreactor.EPollReactor
+2021-05-21 16:43:56 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'bfipricecrawler',
+ 'DEPTH_LIMIT': 10,
+ 'DOWNLOAD_TIMEOUT': 540,
+ 'LOG_FILE': 'logs/default/mobil123/0e9a965aba1911ebb4390800272dd3cf.log',
+ 'NEWSPIDER_MODULE': 'bfipricecrawler.spiders',
+ 'ROBOTSTXT_OBEY': True,
+ 'SPIDER_MODULES': ['bfipricecrawler.spiders']}
+2021-05-21 16:43:56 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats']
+2021-05-21 16:43:57 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "firefox", "acceptInsecureCerts": true, "moz:firefoxOptions": {"binary": "/usr/bin/firefox"}}}, "desiredCapabilities": {"browserName": "firefox", "acceptInsecureCerts": true, "marionette": true, "moz:firefoxOptions": {"binary": "/usr/bin/firefox"}}}
+2021-05-21 16:43:57 [urllib3.connectionpool] DEBUG: Starting new HTTP connection (1): 127.0.0.1:37423
+2021-05-21 16:44:04 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session HTTP/1.1" 200 705
+2021-05-21 16:44:04 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:44:04 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy_selenium.SeleniumMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2021-05-21 16:44:04 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2021-05-21 16:44:04 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2021-05-21 16:44:04 [scrapy.core.engine] INFO: Spider opened
+2021-05-21 16:44:04 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2021-05-21 16:44:14 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.mobil123.com/robots.txt> (failed 1 times): DNS lookup failed: no results for hostname lookup: www.mobil123.com.
+2021-05-21 16:44:14 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.mobil123.com/robots.txt> (referer: None)
+2021-05-21 16:44:14 [protego] DEBUG: Rule at line 1 without any user agent to enforce it on.
+2021-05-21 16:44:14 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/honda-mobilio-rs-jawa-barat-sumurbandung/7707340"}
+2021-05-21 16:46:30 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 14
+2021-05-21 16:46:30 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:30 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing_price"}
+2021-05-21 16:46:30 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 292
+2021-05-21 16:46:30 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:30 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing__section__head"}
+2021-05-21 16:46:30 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 200 88
+2021-05-21 16:46:30 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:30 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source {}
+2021-05-21 16:46:30 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source HTTP/1.1" 200 406406
+2021-05-21 16:46:31 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:31 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {}
+2021-05-21 16:46:31 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 92
+2021-05-21 16:46:31 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:31 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.mobil123.com/dijual/honda-mobilio-rs-jawa-barat-sumurbandung/7707340> (referer: None)
+2021-05-21 16:46:31 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/toyota-kijang-innova-v-luxury-dki-jakarta-kebon-jeruk/7856499"}
+2021-05-21 16:46:33 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 14
+2021-05-21 16:46:33 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:33 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing_price"}
+2021-05-21 16:46:34 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 292
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing__section__head"}
+2021-05-21 16:46:34 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 200 88
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source {}
+2021-05-21 16:46:34 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source HTTP/1.1" 200 396527
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {}
+2021-05-21 16:46:34 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 105
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.mobil123.com/dijual/toyota-kijang-innova-v-luxury-dki-jakarta-kebon-jeruk/7856499> (referer: None)
+2021-05-21 16:46:34 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/honda-civic-rs-jawa-barat-bandung/7006023"}
+2021-05-21 16:46:37 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 14
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing_price"}
+2021-05-21 16:46:37 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 292
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing__section__head"}
+2021-05-21 16:46:37 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 200 88
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source {}
+2021-05-21 16:46:37 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source HTTP/1.1" 200 374179
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {}
+2021-05-21 16:46:37 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 85
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:46:37 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.mobil123.com/dijual/honda-civic-rs-jawa-barat-bandung/7006023> (referer: None)
+2021-05-21 16:46:37 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/honda-hr-v-e-special-edition-jawa-barat-sumurbandung/7706504"}
+2021-05-21 16:47:07 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 14
+2021-05-21 16:47:07 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:47:07 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing_price"}
+2021-05-21 16:47:08 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 292
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing__section__head"}
+2021-05-21 16:47:08 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 200 88
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source {}
+2021-05-21 16:47:08 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source HTTP/1.1" 200 413256
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {}
+2021-05-21 16:47:08 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 104
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:47:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.mobil123.com/dijual/honda-hr-v-e-special-edition-jawa-barat-sumurbandung/7706504> (referer: None)
+2021-05-21 16:47:08 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/toyota-land-cruiser-prado-tx-l-dki-jakarta-kebayoran-lama/7856492"}
+2021-05-21 16:49:11 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 14
+2021-05-21 16:49:11 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:49:11 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing_price"}
+2021-05-21 16:49:12 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 292
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing__section__head"}
+2021-05-21 16:49:12 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 200 88
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source {}
+2021-05-21 16:49:12 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/source HTTP/1.1" 200 393605
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: GET http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {}
+2021-05-21 16:49:12 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "GET /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 109
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:49:12 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.mobil123.com/dijual/toyota-land-cruiser-prado-tx-l-dki-jakarta-kebayoran-lama/7856492> (referer: None)
+2021-05-21 16:49:12 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/wuling-almaz-s-plus-t-smart-enjoy-dki-jakarta-mangga-dua/7822435"}
+2021-05-21 16:50:36 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 200 14
+2021-05-21 16:50:36 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:36 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing_price"}
+2021-05-21 16:50:36 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 709
+2021-05-21 16:50:36 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:36 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing__section__head"}
+2021-05-21 16:50:36 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 709
+2021-05-21 16:50:36 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:37 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing_price"}
+2021-05-21 16:50:37 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 500 105
+2021-05-21 16:50:37 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:37 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element {"using": "css selector", "value": ".listing__section__head"}
+2021-05-21 16:50:37 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/element HTTP/1.1" 404 123
+2021-05-21 16:50:37 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/mitsubishi-outlander-sport-px-banten-villa-melati-mas/7856410"}
+2021-05-21 16:50:38 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 404 123
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/toyota-sienta-q-banten-villa-melati-mas/7856453"}
+2021-05-21 16:50:38 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 404 123
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/suzuki-carry-dki-jakarta-mt-haryono/7752101"}
+2021-05-21 16:50:38 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 404 123
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: POST http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url {"url": "https://www.mobil123.com/dijual/toyota-kijang-innova-g-dki-jakarta-kebayoran-lama/7856470"}
+2021-05-21 16:50:38 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "POST /session/dc6b6c5d-2347-429b-9398-adbdabc46c07/url HTTP/1.1" 404 123
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:38 [scrapy.extensions.logstats] INFO: Crawled 6 pages (at 6 pages/min), scraped 0 items (at 0 items/min)
+2021-05-21 16:50:38 [scrapy.core.scraper] ERROR: Error downloading <GET https://www.mobil123.com/dijual/wuling-almaz-s-plus-t-smart-enjoy-dki-jakarta-mangga-dua/7822435>
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+StopIteration: <200 https://www.mobil123.com/robots.txt>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy/core/downloader/middleware.py", line 36, in process_request
+    response = yield deferred_from_coro(method(request=request, spider=spider))
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy_selenium/middlewares.py", line 95, in process_request
+    WebDriverWait(self.driver, request.wait_time).until(
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/support/wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+2021-05-21 16:50:38 [scrapy.core.scraper] ERROR: Error downloading <GET https://www.mobil123.com/dijual/mitsubishi-outlander-sport-px-banten-villa-melati-mas/7856410>
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+StopIteration: <200 https://www.mobil123.com/robots.txt>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy/core/downloader/middleware.py", line 36, in process_request
+    response = yield deferred_from_coro(method(request=request, spider=spider))
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy_selenium/middlewares.py", line 84, in process_request
+    self.driver.get(request.url)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+    self.execute(Command.GET, {'url': url})
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: Tried to run command without establishing a connection
+
+2021-05-21 16:50:38 [scrapy.core.scraper] ERROR: Error downloading <GET https://www.mobil123.com/dijual/toyota-sienta-q-banten-villa-melati-mas/7856453>
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+StopIteration: <200 https://www.mobil123.com/robots.txt>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy/core/downloader/middleware.py", line 36, in process_request
+    response = yield deferred_from_coro(method(request=request, spider=spider))
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy_selenium/middlewares.py", line 84, in process_request
+    self.driver.get(request.url)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+    self.execute(Command.GET, {'url': url})
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: Tried to run command without establishing a connection
+
+2021-05-21 16:50:38 [scrapy.core.scraper] ERROR: Error downloading <GET https://www.mobil123.com/dijual/suzuki-carry-dki-jakarta-mt-haryono/7752101>
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+StopIteration: <200 https://www.mobil123.com/robots.txt>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy/core/downloader/middleware.py", line 36, in process_request
+    response = yield deferred_from_coro(method(request=request, spider=spider))
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy_selenium/middlewares.py", line 84, in process_request
+    self.driver.get(request.url)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+    self.execute(Command.GET, {'url': url})
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: Tried to run command without establishing a connection
+
+2021-05-21 16:50:38 [scrapy.core.scraper] ERROR: Error downloading <GET https://www.mobil123.com/dijual/toyota-kijang-innova-g-dki-jakarta-kebayoran-lama/7856470>
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+StopIteration: <200 https://www.mobil123.com/robots.txt>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/twisted/internet/defer.py", line 1445, in _inlineCallbacks
+    result = current_context.run(g.send, result)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy/core/downloader/middleware.py", line 36, in process_request
+    response = yield deferred_from_coro(method(request=request, spider=spider))
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/scrapy_selenium/middlewares.py", line 84, in process_request
+    self.driver.get(request.url)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+    self.execute(Command.GET, {'url': url})
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/home/david/anaconda3/envs/BFI-FINANCE/lib/python3.8/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: Tried to run command without establishing a connection
+
+2021-05-21 16:50:38 [scrapy.core.engine] INFO: Closing spider (finished)
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: DELETE http://127.0.0.1:37423/session/dc6b6c5d-2347-429b-9398-adbdabc46c07 {}
+2021-05-21 16:50:38 [urllib3.connectionpool] DEBUG: http://127.0.0.1:37423 "DELETE /session/dc6b6c5d-2347-429b-9398-adbdabc46c07 HTTP/1.1" 404 123
+2021-05-21 16:50:38 [selenium.webdriver.remote.remote_connection] DEBUG: Finished Request
+2021-05-21 16:50:38 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/exception_count': 6,
+ 'downloader/exception_type_count/selenium.common.exceptions.InvalidSessionIdException': 4,
+ 'downloader/exception_type_count/selenium.common.exceptions.TimeoutException': 1,
+ 'downloader/exception_type_count/twisted.internet.error.DNSLookupError': 1,
+ 'downloader/request_bytes': 460,
+ 'downloader/request_count': 2,
+ 'downloader/request_method_count/GET': 2,
+ 'downloader/response_bytes': 1913645,
+ 'downloader/response_count': 6,
+ 'downloader/response_status_count/200': 6,
+ 'elapsed_time_seconds': 394.100933,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2021, 5, 21, 9, 50, 38, 309964),
+ 'log_count/DEBUG': 117,
+ 'log_count/ERROR': 5,
+ 'log_count/INFO': 9,
+ 'memusage/max': 120324096,
+ 'memusage/startup': 112852992,
+ 'response_received_count': 6,
+ 'retry/count': 1,
+ 'retry/reason_count/twisted.internet.error.DNSLookupError': 1,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 10,
+ 'scheduler/dequeued/memory': 10,
+ 'scheduler/enqueued': 10,
+ 'scheduler/enqueued/memory': 10,
+ 'start_time': datetime.datetime(2021, 5, 21, 9, 44, 4, 209031)}
+2021-05-21 16:50:38 [scrapy.core.engine] INFO: Spider closed (finished)
