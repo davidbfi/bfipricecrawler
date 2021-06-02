@@ -66,25 +66,25 @@ class Mobil123Crawler(scrapy.Spider):
         item['spesifikasi_ringkas'] = spesifikasi_ringkas
         item['source'] = "Mobil 123"
 
-        post_url = "http://localhost:9200/seachcar/cars"
-        payload = {
-            "nama": item["nama"],
-            "merek": item["merek"],
-            "model": item["model"],
-            "varian": item["varian"],
-            "provinsi": item["provinsi"],
-            "kabupaten_kecamatan": item["kabupaten_kecamatan"],
-            "source": item["source"],
-            "transmisi": item["transmisi"],
-            "tipe_penjual": item["tipe_penjual"],
-            'tanggal_diperbaharui_sumber': item["tanggal_diperbaharui_sumber"]
-        }
-        headers = {
-            'Content-Type': "application/json",
-            'cache-control': "no-cache"
-        }
-        payload = json.dumps(payload)
-        response = requests.request("POST", post_url, data=payload, headers=headers)
+        # post_url = "http://localhost:9200/seachcar/cars"
+        # payload = {
+        #     "nama": item["nama"],
+        #     "merek": item["merek"],
+        #     "model": item["model"],
+        #     "varian": item["varian"],
+        #     "provinsi": item["provinsi"],
+        #     "kabupaten_kecamatan": item["kabupaten_kecamatan"],
+        #     "source": item["source"],
+        #     "transmisi": item["transmisi"],
+        #     "tipe_penjual": item["tipe_penjual"],
+        #     'tanggal_diperbaharui_sumber': item["tanggal_diperbaharui_sumber"]
+        # }
+        # headers = {
+        #     'Content-Type': "application/json",
+        #     'cache-control': "no-cache"
+        # }
+        # payload = json.dumps(payload)
+        # response = requests.request("POST", post_url, data=payload, headers=headers)
         yield item
 
 
