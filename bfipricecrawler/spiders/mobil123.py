@@ -29,7 +29,7 @@ data = get_url()
 
 class Mobil123Crawler(scrapy.Spider):
     name = 'mobil123'
-    urls = data[:5]
+    urls = data
     start_urls = urls
 
     def start_requests(self):
@@ -64,20 +64,27 @@ class Mobil123Crawler(scrapy.Spider):
         item['tipe_penjual'] = informasi_penjual[1].strip()
         item['tanggal_diperbaharui_sumber'] = update_date.strip()
         item['spesifikasi_ringkas'] = spesifikasi_ringkas
+        item['source'] = "Mobil 123"
 
-        # post_url = "http://localhost:9200/bficar/car"
-        # payload = {
-        #     "harga": item["harga"],
-        #     "url": item["url"],
-        #     "nama": item["nama"],
-        # }
-        #
-        # headers = {
-        #     'Content-Type': "application/json",
-        #     'cache-control': "no-cache"
-        # }
-        # payload = json.dumps(payload)
-        # response = requests.request("POST", post_url, data=payload, headers=headers)
+        post_url = "http://localhost:9200/seachcar/cars"
+        payload = {
+            "nama": item["nama"],
+            "merek": item["merek"],
+            "model": item["model"],
+            "varian": item["varian"],
+            "provinsi": item["provinsi"],
+            "kabupaten_kecamatan": item["kabupaten_kecamatan"],
+            "source": item["source"],
+            "transmisi": item["transmisi"],
+            "tipe_penjual": item["tipe_penjual"],
+            'tanggal_diperbaharui_sumber': item["tanggal_diperbaharui_sumber"]
+        }
+        headers = {
+            'Content-Type': "application/json",
+            'cache-control': "no-cache"
+        }
+        payload = json.dumps(payload)
+        response = requests.request("POST", post_url, data=payload, headers=headers)
         yield item
 
 
