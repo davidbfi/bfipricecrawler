@@ -31,15 +31,17 @@ CONCURRENT_REQUESTS = 16
 # SELENIUM_DRIVER_ARGUMENTS=[]
 
 
-# ITEM_PIPELINES = {
-#     'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500
-# }
-#
-# ELASTICSEARCH_SERVERS = ['localhost']
-# ELASTICSEARCH_INDEX = 'scrapy'
-# ELASTICSEARCH_INDEX_DATE_FORMAT = '%Y-%m'
-# ELASTICSEARCH_TYPE = 'items'
-# #ELASTICSEARCH_UNIQ_KEY = 'url'  # Custom unique key
-#
-# # can also accept a list of fields if need a composite key
-# ELASTICSEARCH_UNIQ_KEY = ['nama', 'url']
+ITEM_PIPELINES = {
+    'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500
+}
+
+ELASTICSEARCH_SERVERS = ['localhost']
+ELASTICSEARCH_PORT = 9200
+ELASTICSEARCH_INDEX = 'scrapycar'
+
+ELASTICSEARCH_INDEX_DATE_FORMAT = '%Y-%m'
+ELASTICSEARCH_TYPE = 'items'
+#ELASTICSEARCH_UNIQ_KEY = 'url'  # Custom unique key
+
+# can also accept a list of fields if need a composite key
+ELASTICSEARCH_UNIQ_KEY = 'nama'
