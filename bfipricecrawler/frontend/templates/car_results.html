@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+    <link rel="icon" href="http://obj-cache.cloud.ruanbekker.com/favicon.ico">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>Bookmarks Search</title>
+  </head>
+  <body>
+  <div class="container">
+    <div style="background:transparent !important" class="jumbotron">
+      <div style="font-family: 'Pacifico', cursive;">
+        <p>
+          <center>
+          <font size="8">Search Your Car</font>
+          </center>
+        </p>
+      </div>
+    </div>
+  <form action="/search/cars" method="post">
+    <div class="input-group">
+      <input type="text" class="form-control input-lg" name="input" placeholder="Search"  autofocus>
+      <div class="input-group-btn">
+        <button class="btn btn-primary btn-lg" type="submit">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+  <center>
+      <h1>Results: ({{ res['hits']['total'] }}) </h1>
+  </center>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Merek</th>
+                <th>Model</th>
+                <th>URL</th>
+                <th>Varian</th>
+                <th>Tahun</th>
+                <th>Transmisi</th>
+                <th>Harga</th>
+                <th>Spesifikasi</th>
+                <th>Source</th>
+                <th>Provinsi</th>
+                <th>Kota</th>
+                <th>Tanggal Diperbaharui</th>
+              </tr>
+            </thead>
+            {% for hit in res['hits']['hits'] %}
+                <tbody>
+                  <tr>
+                    <th scope="row">{{ hit['_source']['nama'] }}</th>
+                      <td>{{ hit['_source'] ['merek'] }}</td>
+                      <td>{{ hit['_source'] ['model'] }}</td>
+                      <td><a href="{{ hit['_source']['url'] }}">{{ hit['_source']['url'] }}</a></td>
+                      <td>{{ hit['_source'] ['varian'] }}</td>
+                      <td>{{ hit['_source'] ['tahun'] }}</td>
+                      <td>{{ hit['_source'] ['transmisi'] }}</td>
+                      <td>{{ hit['_source'] ['harga'] }}</td>
+                      <td>{{ hit['_source'] ['spesifikasi_ringkas'] }}</td>
+                      <td>{{ hit['_source'] ['source'] }}</td>
+                      <td>{{ hit['_source'] ['provinsi'] }}</td>
+                      <td>{{ hit['_source'] ['kabupaten_kecamatan'] }}</td>
+                      <td>{{ hit['_source'] ['tanggal_diperbaharui_sumber'] }}</td>
+                  </tr>
+                </tbody>
+            {% endfor %}
+          </table>
+        <footer class="footer">
+          <p>&copy; BFI Search Engine</p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
