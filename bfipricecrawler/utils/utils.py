@@ -64,5 +64,6 @@ def clean_price(price):
     return cleaned_price
 
 
-def parse_location():
-    pass
+def parse_location(lokasi):
+    tingkatan_wilayah = ['kecamatan', 'kabupaten_kota', 'provinsi']
+    return dict(zip(tingkatan_wilayah, lokasi))
