@@ -1,3 +1,4 @@
+import re
 import requests
 import itertools
 from lxml.html import fromstring
@@ -31,10 +32,6 @@ def get_proxies():
     return proxies
 
 
-def clean_price():
-    pass
-
-
 def clean_date():
     pass
 
@@ -56,3 +53,16 @@ def list_to_dict(_list):
         ringkasan_spesifikasi_new = ringkasan_spesifikasi_new[0:6] + ringkasan_spesifikasi_new[9:23]
 
     return dict(itertools.zip_longest(*[iter(ringkasan_spesifikasi_new)] * 2, fillvalue=""))
+
+
+def clean_price(price):
+    if '-' in price:
+        splitted_price = price.split('-')[0]
+        cleaned_price = re.sub('[^0-9]', '', splitted_price)
+    else:
+        cleaned_price = re.sub('[^0-9]', '', price)
+    return cleaned_price
+
+
+def parse_location():
+    pass
