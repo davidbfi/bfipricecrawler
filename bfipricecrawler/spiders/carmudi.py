@@ -58,11 +58,11 @@ class CarmudiCrawler(scrapy.Spider):
         item["model"] = spesifikasi_ringkas.get('Model')
         item["varian"] = spesifikasi_ringkas.get('Varian')
         item["transmisi"] = spesifikasi_ringkas.get('Transmisi')
-        item["harga"] = clean_price(response.css('div[class="listing__price  delta  weight--bold"] ::text').extract_first())
+        item["harga"] = int(clean_price(response.css('div[class="listing__price  delta  weight--bold"] ::text').extract_first()))
         item['provinsi'] = informasi_penjual[-1].split('»')[0].strip()
         item['kabupaten_kecamatan'] = informasi_penjual[-1].split('»')[-1].strip()
         item['tipe_penjual'] = informasi_penjual[1].strip()
         item['tanggal_diperbaharui_sumber'] = update_date.strip()
         item['spesifikasi_ringkas'] = spesifikasi_ringkas
-        item['source'] = "Carmudi"
+        item['sumber'] = "Carmudi"
         yield item

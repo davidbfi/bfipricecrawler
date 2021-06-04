@@ -64,7 +64,7 @@ class Mobil123Crawler(scrapy.Spider):
         item['tipe_penjual'] = informasi_penjual[1].strip()
         item['tanggal_diperbaharui_sumber'] = update_date.strip()
         item['spesifikasi_ringkas'] = spesifikasi_ringkas
-        item['source'] = "Mobil 123"
+        item['sumber'] = "Mobil 123"
 
         # post_url = "http://localhost:9200/seachcar/cars"
         # payload = {
