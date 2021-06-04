@@ -38,7 +38,6 @@
                 <th>Rata rata</th>
                 <th>Harga Tertinggi</th>
                 <th>Harga Terendah</th>
-                <th>Median</th>
               </tr>
             </thead>
                 {% for agg in res['aggregations']['agg_lokasi']['buckets'] %}
@@ -49,7 +48,6 @@
                       <td>{{ agg['price_stats']['avg'] }}</td>
                       <td>{{ agg['price_stats']['max'] }}</td>
                       <td>{{ agg['price_stats']['min'] }}</td>
-                      <td>{{ agg['price_stats'][''] }}</td>
                   </tr>
                 </tbody>
                 {% endfor %}

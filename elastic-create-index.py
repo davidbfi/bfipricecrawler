@@ -105,3 +105,23 @@ if __name__ == "__main__":
 
     if(response.status_code==200):
         print("6. Created a new index: autocomplete")
+
+
+"""
+find end point mapping in elasticsearch
+http://localhost:9200/carsearchengine/_mapping
+
+send parameter
+
+{
+  "properties": {
+    "my_field": { 
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+
+curl -X DELETE "localhost:9200/carsearchengine?pretty"
+
+"""

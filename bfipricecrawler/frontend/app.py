@@ -34,34 +34,72 @@ def home():
 @app.route('/search/cars', methods=['GET', 'POST'])
 def search_request():
     search_term = request.form["input"]
-    res = es.search(
-        index=["carsearchengine"],
-        size=1000,
-        body={
-            "query": {
-                "multi_match": {
-                    "query": " ".join(search_term.split('.')),
-                    "fields": [
-                        'nama',
-                        'merek',
-                        'model',
-                        'transmisi',
-                        'provinsi',
-                        'sumber'
-                    ]
-                }
-            },
-            "aggs": {
-                "agg_lokasi": {
-                    "terms": {"field": "provinsi"},
-                    "aggs": {
-                        "price_stats": {"stats": {"field": "harga"}}
+    try:
+        parsing_search = search_term.split('.')
+        merek = parsing_search[0]
+        model = parsing_search[1]
+        varian = parsing_search[2]
+
+        if varian.find('AT') != -1:
+            transmisi = 'Automatic'
+        elif varian.find('MT') != -1:
+            transmisi = 'Manual'
+
+        res = es.search(
+            index=["carsearchengine"],
+            size=20,
+            body={
+                "query": {
+                    "bool": {
+                        "must": {
+                            "term": {"merek": merek.lower()}
+                        },
+                        "filter": {
+                            "term": {"model": model.lower()}
+                        },
+                        "should": [
+                            {"term": {"transmisi": transmisi.lower()}},
+                            {"term": {"varian": varian.lower()}}
+                        ],
+                        "minimum_should_match": "75%",
+                        "boost": 1.0
+                    }
+                },
+                "aggs": {
+                    "agg_lokasi": {
+                        "terms": {"field": "provinsi"},
+                        "aggs": {
+                            "price_stats": {"stats": {"field": "harga"}}
+                        }
                     }
                 }
             }
-        }
-    )
-    return render_template('car_results.html', res=res)
+        )
+        return render_template('car_results.html', res=res)
+    except:
+        res = es.search(
+            index=["carsearchengine"],
+            size=20,
+            body={
+                "query": {
+                        "multi_match": {
+                            "query": search_term,
+                            "fields": [
+                                "nama"
+                            ]
+                        }
+                },
+                "aggs": {
+                    "agg_lokasi": {
+                        "terms": {"field": "provinsi"},
+                        "aggs": {
+                            "price_stats": {"stats": {"field": "harga"}}
+                        }
+                    }
+                }
+            }
+        )
+        return render_template('car_results.html', res=res)
 
 
 if __name__ == '__main__':
