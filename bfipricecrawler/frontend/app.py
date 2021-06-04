@@ -35,20 +35,28 @@ def home():
 def search_request():
     search_term = request.form["input"]
     res = es.search(
-        index=["scrapycar-2021-05", "scrapycar-2021-06"],
-        size=20,
+        index=["carsearchengine"],
+        size=1000,
         body={
             "query": {
                 "multi_match": {
                     "query": " ".join(search_term.split('.')),
                     "fields": [
-                        "nama",
-                        "merek",
+                        'nama',
+                        'merek',
                         'model',
                         'transmisi',
                         'provinsi',
-                        'source'
+                        'sumber'
                     ]
+                }
+            },
+            "aggs": {
+                "agg_lokasi": {
+                    "terms": {"field": "provinsi"},
+                    "aggs": {
+                        "price_stats": {"stats": {"field": "harga"}}
+                    }
                 }
             }
         }

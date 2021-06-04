@@ -37,11 +37,11 @@ ITEM_PIPELINES = {
 
 ELASTICSEARCH_SERVERS = ['localhost']
 ELASTICSEARCH_PORT = 9200
-ELASTICSEARCH_INDEX = 'scrapycar'
+ELASTICSEARCH_INDEX = 'carsearchengine'
 
-ELASTICSEARCH_INDEX_DATE_FORMAT = '%Y-%m'
+#ELASTICSEARCH_INDEX_DATE_FORMAT = '%Y-%m'
 ELASTICSEARCH_TYPE = 'items'
 #ELASTICSEARCH_UNIQ_KEY = 'url'  # Custom unique key
 
 # can also accept a list of fields if need a composite key
-ELASTICSEARCH_UNIQ_KEY = 'nama'
+ELASTICSEARCH_UNIQ_KEY = 'url'
