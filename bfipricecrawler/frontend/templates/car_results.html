@@ -29,7 +29,31 @@
     </div>
   </form>
   <center>
-      <h1>Results: ({{ res['hits']['total'] }}) </h1>
+    <h1>Results: ({{ res['hits']['total']['value'] }}) </h1>
+      <table class="table">
+            <thead>
+              <tr>
+                <th>Lokasi</th>
+                <th>Total Car</th>
+                <th>Rata rata</th>
+                <th>Harga Tertinggi</th>
+                <th>Harga Terendah</th>
+                <th>Median</th>
+              </tr>
+            </thead>
+                {% for agg in res['aggregations']['agg_lokasi']['buckets'] %}
+                <tbody>
+                  <tr>
+                      <td>{{ agg['key']}}</td>
+                      <td>{{ agg['doc_count'] }}</td>
+                      <td>{{ agg['price_stats']['avg'] }}</td>
+                      <td>{{ agg['price_stats']['max'] }}</td>
+                      <td>{{ agg['price_stats']['min'] }}</td>
+                      <td>{{ agg['price_stats'][''] }}</td>
+                  </tr>
+                </tbody>
+                {% endfor %}
+          </table>
   </center>
           <table class="table">
             <thead>
@@ -61,7 +85,7 @@
                       <td>{{ hit['_source'] ['transmisi'] }}</td>
                       <td>{{ hit['_source'] ['harga'] }}</td>
                       <td>{{ hit['_source'] ['spesifikasi_ringkas'] }}</td>
-                      <td>{{ hit['_source'] ['source'] }}</td>
+                      <td>{{ hit['_source'] ['sumber'] }}</td>
                       <td>{{ hit['_source'] ['provinsi'] }}</td>
                       <td>{{ hit['_source'] ['kabupaten_kecamatan'] }}</td>
                       <td>{{ hit['_source'] ['tanggal_diperbaharui_sumber'] }}</td>
