@@ -10,27 +10,6 @@ def home():
     return render_template('search.html')
 
 
-# @app.route('/search/results', methods=['GET', 'POST'])
-# def search_request():
-#     search_term = request.form["input"]
-#     res = es.search(
-#         index="bficar",
-#         size=20,
-#         body={
-#             "query": {
-#                 "multi_match": {
-#                     "query": search_term,
-#                     "fields": [
-#                         "nama",
-#                         "url",
-#                     ]
-#                 }
-#             }
-#         }
-#     )
-#     return render_template('results.html', res=res)
-
-
 @app.route('/search/cars', methods=['GET', 'POST'])
 def search_request():
     search_term = request.form["input"]
@@ -61,11 +40,12 @@ def search_request():
                             {"term": {"transmisi": transmisi.lower()}},
                             {"term": {"varian": varian.lower()}}
                         ],
-                        "minimum_should_match": "75%",
+                        "minimum_should_match": "95%",
                         "boost": 1.0
                     }
                 },
                 "aggs": {
+                    "price_stats": {"stats": {"field": "harga"}},
                     "agg_lokasi": {
                         "terms": {"field": "provinsi"},
                         "aggs": {
@@ -85,7 +65,9 @@ def search_request():
                         "multi_match": {
                             "query": search_term,
                             "fields": [
-                                "nama"
+                                "nama",
+                                "sumber",
+                                "tahun"
                             ]
                         }
                 },
