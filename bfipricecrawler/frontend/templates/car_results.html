@@ -30,8 +30,28 @@
   </form>
   <center>
     <h1>Results: ({{ res['hits']['total']['value'] }}) </h1>
-      <table class="table">
+    <table class="table">
+            <h2>Statistik Harga </h2>
             <thead>
+              <tr>
+                <th>Harga Rata rata</th>
+                <th>Harga Tertinggi</th>
+                <th>Harga Terendah</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                  <td>{{ res['aggregations']['price_stats']['avg'] }}</td>
+                  <td>{{ res['aggregations']['price_stats']['max'] }}</td>
+                  <td>{{ res['aggregations']['price_stats']['min'] }}</td>
+              </tr>
+            </tbody>
+
+      </table>
+      <table class="table">
+          <h2>Statistik Harga Berdasarkan Lokasi</h2>
+          <thead>
               <tr>
                 <th>Lokasi</th>
                 <th>Total Car</th>
@@ -79,7 +99,7 @@
                       <td>{{ hit['_source'] ['model'] }}</td>
                       <td><a href="{{ hit['_source']['url'] }}">{{ hit['_source']['url'] }}</a></td>
                       <td>{{ hit['_source'] ['varian'] }}</td>
-                      <td>{{ hit['_source'] ['tahun'] }}</td>
+                      <td>{{ hit['_source'] ['spesifikasi_ringkas'] ['Tahun'] }}</td>
                       <td>{{ hit['_source'] ['transmisi'] }}</td>
                       <td>{{ hit['_source'] ['harga'] }}</td>
                       <td>{{ hit['_source'] ['spesifikasi_ringkas'] }}</td>
