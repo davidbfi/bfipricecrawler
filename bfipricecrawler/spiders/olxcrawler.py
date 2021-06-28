@@ -26,6 +26,7 @@ class SpiderSpider(CrawlSpider):
                 item['model'] = data_deskripsi.get('Model')
                 item['varian'] = data_deskripsi.get('Varian')
                 item['transmisi'] = data_deskripsi.get('Transmisi')
+                item["tahun"] = data_deskripsi.get('Tahun')
                 item['provinsi'] = lokasi.get('provinsi')
                 item['kabupaten_kecamatan'] = lokasi.get('kabupaten_kota')
                 item['harga'] = int(clean_price(response.css('span[class="_2xKfz"] ::text').extract_first()))

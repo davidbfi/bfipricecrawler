@@ -29,9 +29,16 @@ class CarItem(scrapy.Item):
     deskripsi = scrapy.Field()
     tanggal_diperbaharui_sumber = scrapy.Field()
     waktu_crawl = scrapy.Field()
+    tahun = scrapy.Field()
 
 
 class SpesifikasiItem(scrapy.Item):
     pass
 
+
+class CarOtr(scrapy.Item):
+    model = scrapy.Field()
+    tipe = scrapy.Field()
+    harga_otr = scrapy.Field()
+    sumber = scrapy.Field()
 
