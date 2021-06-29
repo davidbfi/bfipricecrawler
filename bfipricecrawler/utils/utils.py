@@ -49,8 +49,13 @@ def list_to_dict(_list):
     for line in _list:
         if not line.strip() == "":
             ringkasan_spesifikasi_new.append(line)
+    print("SPESIFIKASI", ringkasan_spesifikasi_new, len(ringkasan_spesifikasi_new))
+    if len(ringkasan_spesifikasi_new) == 21:
+        ringkasan_spesifikasi_new = ringkasan_spesifikasi_new[0:6] + ringkasan_spesifikasi_new[9:21]
     if len(ringkasan_spesifikasi_new) == int(23):
         ringkasan_spesifikasi_new = ringkasan_spesifikasi_new[0:6] + ringkasan_spesifikasi_new[9:23]
+    if len(ringkasan_spesifikasi_new) == int(25):
+        ringkasan_spesifikasi_new = ringkasan_spesifikasi_new[2:8] + ringkasan_spesifikasi_new[11:]
 
     return dict(itertools.zip_longest(*[iter(ringkasan_spesifikasi_new)] * 2, fillvalue=""))
 

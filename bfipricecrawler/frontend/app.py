@@ -1,8 +1,15 @@
 from flask import Flask, render_template, request
+
 from elasticsearch import Elasticsearch
 
 app = Flask(__name__)
 es = Elasticsearch('localhost', port=9200)
+
+
+@app.template_filter()
+def currency_format(value):
+    value = float(value)
+    return "Rp {:,.2f}".format(value)
 
 
 @app.route('/')
@@ -12,6 +19,7 @@ def home():
 
 @app.route('/search/cars', methods=['GET', 'POST'])
 def search_request():
+
     search_term = request.form["input"]
     try:
         parsing_search = search_term.split('.')
@@ -26,7 +34,7 @@ def search_request():
 
         res = es.search(
             index=["carsearchengine"],
-            size=20,
+            size=10000,
             body={
                 "query": {
                     "bool": {
@@ -47,7 +55,7 @@ def search_request():
                 "aggs": {
                     "price_stats": {"stats": {"field": "harga"}},
                     "agg_lokasi": {
-                        "terms": {"field": "provinsi"},
+                        "terms": {"field": "provinsi.keyword"},
                         "aggs": {
                             "price_stats": {"stats": {"field": "harga"}}
                         }
@@ -55,11 +63,21 @@ def search_request():
                 }
             }
         )
+        # fields = {}
+        # for num, doc in enumerate(res["hits"]["hits"]):
+        #     for key, val in doc["_source"].items():
+        #         try:
+        #             fields[key] = np.append(fields[key], val)
+        #         except KeyError:
+        #             fields[key] = np.array([val])
+        # elastic_df = pd.DataFrame(fields)
+        #
+        # elastic_df.to_csv("{}.csv".format(search_term))
         return render_template('car_results.html', res=res)
     except:
         res = es.search(
             index=["carsearchengine"],
-            size=20,
+            size=10000,
             body={
                 "query": {
                         "multi_match": {
@@ -67,13 +85,16 @@ def search_request():
                             "fields": [
                                 "nama",
                                 "sumber",
-                                "tahun"
+                                "tahun",
+                                "warna"
                             ]
                         }
                 },
                 "aggs": {
+                    "price_stats": {"stats": {"field": "harga"}},
                     "agg_lokasi": {
-                        "terms": {"field": "provinsi"},
+
+                        "terms": {"field": "provinsi.keyword"},
                         "aggs": {
                             "price_stats": {"stats": {"field": "harga"}}
                         }
@@ -81,6 +102,17 @@ def search_request():
                 }
             }
         )
+        fields = {}
+        # for num, doc in enumerate(res["hits"]["hits"]):
+        #
+        #     for key, val in doc["_source"].items():
+        #         try:
+        #             fields[key] = np.append(fields[key], val)
+        #         except KeyError:
+        #             fields[key] = np.array([val])
+        # elastic_df = pd.DataFrame(fields)
+        # elastic_df.to_csv("{}.csv".format(search_term))
+
         return render_template('car_results.html', res=res)
 
 

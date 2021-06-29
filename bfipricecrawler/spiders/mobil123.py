@@ -54,18 +54,18 @@ class Mobil123Crawler(scrapy.Spider):
         informasi_penjual = response.css('div[class="list-item  soft-half--ends"] ::text').extract()
         update_date = response.css('div[class="listing__updated  visuallyhidden--palm"] ::text').extract_first().split(':')[-1]
         item["nama"] = response.css('h1[class="headline  listing__title  delta  flush--bottom"] ::text').extract_first()
-        item["merek"] = spesifikasi_ringkas.get('Merek')
-        item["model"] = spesifikasi_ringkas.get('Model')
-        item["varian"] = spesifikasi_ringkas.get('Varian')
-        item["transmisi"] = spesifikasi_ringkas.get('Transmisi')
-        item["tahun"] = spesifikasi_ringkas.get('Tahun')
-        item["harga"] = clean_price(response.css('div[class="listing__price  delta  weight--bold"] ::text').extract_first())
+        item["merek"] = spesifikasi_ringkas.get('Merek') or ""
+        item["model"] = spesifikasi_ringkas.get('Model') or ""
+        item["varian"] = spesifikasi_ringkas.get('Varian') or ""
+        item["transmisi"] = spesifikasi_ringkas.get('Transmisi') or ""
+        item["tahun"] = spesifikasi_ringkas.get('Tahun') or ""
+        item["harga"] = int(clean_price(response.css('div[class="listing__price  delta  weight--bold"] ::text').extract_first()))
         item['provinsi'] = informasi_penjual[-1].split('»')[0].strip()
         item['kabupaten_kecamatan'] = informasi_penjual[-1].split('»')[-1].strip()
         item['tipe_penjual'] = informasi_penjual[1].strip()
         item['tanggal_diperbaharui_sumber'] = update_date.strip()
         item['spesifikasi_ringkas'] = spesifikasi_ringkas
-        item['sumber'] = "Mobil 123"
+        item['sumber'] = "Mobil123"
 
         # post_url = "http://localhost:9200/seachcar/cars"
         # payload = {

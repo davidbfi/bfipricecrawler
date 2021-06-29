@@ -42,9 +42,9 @@
 
             <tbody>
               <tr>
-                  <td>{{ res['aggregations']['price_stats']['avg'] }}</td>
-                  <td>{{ res['aggregations']['price_stats']['max'] }}</td>
-                  <td>{{ res['aggregations']['price_stats']['min'] }}</td>
+                  <td>{{ res['aggregations']['price_stats']['avg'] | currency_format }}</td>
+                  <td>{{ res['aggregations']['price_stats']['max'] | currency_format }}</td>
+                  <td>{{ res['aggregations']['price_stats']['min'] | currency_format }}</td>
               </tr>
             </tbody>
 
@@ -65,9 +65,9 @@
                   <tr>
                       <td>{{ agg['key']}}</td>
                       <td>{{ agg['doc_count'] }}</td>
-                      <td>{{ agg['price_stats']['avg'] }}</td>
-                      <td>{{ agg['price_stats']['max'] }}</td>
-                      <td>{{ agg['price_stats']['min'] }}</td>
+                      <td>{{ agg['price_stats']['avg'] | currency_format }}</td>
+                      <td>{{ agg['price_stats']['max'] | currency_format }}</td>
+                      <td>{{ agg['price_stats']['min'] | currency_format }}</td>
                   </tr>
                 </tbody>
                 {% endfor %}
@@ -84,7 +84,6 @@
                 <th>Tahun</th>
                 <th>Transmisi</th>
                 <th>Harga</th>
-                <th>Spesifikasi</th>
                 <th>Source</th>
                 <th>Provinsi</th>
                 <th>Kota</th>
@@ -101,8 +100,7 @@
                       <td>{{ hit['_source'] ['varian'] }}</td>
                       <td>{{ hit['_source'] ['spesifikasi_ringkas'] ['Tahun'] }}</td>
                       <td>{{ hit['_source'] ['transmisi'] }}</td>
-                      <td>{{ hit['_source'] ['harga'] }}</td>
-                      <td>{{ hit['_source'] ['spesifikasi_ringkas'] }}</td>
+                      <td>{{ hit['_source'] ['harga'] | currency_format }}</td>
                       <td>{{ hit['_source'] ['sumber'] }}</td>
                       <td>{{ hit['_source'] ['provinsi'] }}</td>
                       <td>{{ hit['_source'] ['kabupaten_kecamatan'] }}</td>
