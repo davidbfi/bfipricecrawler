@@ -59,7 +59,7 @@ class CarmudiCrawler(scrapy.Spider):
         item["varian"] = spesifikasi_ringkas.get('Varian') or ""
         item["transmisi"] = spesifikasi_ringkas.get('Transmisi') or ""
         item["warna"] = spesifikasi_ringkas.get('Warna') or ""
-        item["tahun"] = spesifikasi_ringkas.get('Tahun')
+        item["tahun"] = spesifikasi_ringkas.get('Tahun') or ""
         item["harga"] = int(clean_price(response.css('div[class="listing__price  delta  weight--bold"] ::text').extract_first()))
         item['provinsi'] = informasi_penjual[-1].split('»')[0].strip()
         item['kabupaten_kecamatan'] = informasi_penjual[-1].split('»')[-1].strip()

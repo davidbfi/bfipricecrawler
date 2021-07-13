@@ -22,11 +22,12 @@ class SpiderSpider(CrawlSpider):
                 data_deskripsi = list_to_dict(response.css('div[class="_3JPEe"] ::text').extract())
                 item["url"] = response.url
                 item['nama'] = response.css('h1[class="_3rJ6e"] ::text').extract_first()
-                item['merek'] = data_deskripsi.get('Merek')
-                item['model'] = data_deskripsi.get('Model')
-                item['varian'] = data_deskripsi.get('Varian')
-                item['transmisi'] = data_deskripsi.get('Transmisi')
-                item["tahun"] = data_deskripsi.get('Tahun')
+                item['merek'] = data_deskripsi.get('Merek') or ""
+                item['model'] = data_deskripsi.get('Model') or ""
+                item['varian'] = data_deskripsi.get('Varian') or ""
+                item['transmisi'] = data_deskripsi.get('Transmisi') or ""
+                item["warna"] = data_deskripsi.get('Warna') or ""
+                item["tahun"] = data_deskripsi.get('Tahun') or ""
                 item['provinsi'] = lokasi.get('provinsi')
                 item['kabupaten_kecamatan'] = lokasi.get('kabupaten_kota')
                 item['harga'] = int(clean_price(response.css('span[class="_2xKfz"] ::text').extract_first()))
