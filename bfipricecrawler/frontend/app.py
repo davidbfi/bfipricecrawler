@@ -19,7 +19,6 @@ def home():
 
 @app.route('/search/cars', methods=['GET', 'POST'])
 def search_request():
-
     search_term = request.form["input"]
     try:
         parsing_search = search_term.split('.')
@@ -59,20 +58,33 @@ def search_request():
                         "aggs": {
                             "price_stats": {"stats": {"field": "harga"}}
                         }
+                    },
+                    "model_merek_tahun": {
+                        "multi_terms": {
+                            "terms": [{
+                                "field": "merek.keyword"
+                            }, {
+                                "field": "model.keyword"
+                            },
+                                {
+                                    "field": "varian.keyword"
+                                },
+                                {
+                                    "field": "transmisi.keyword"
+                                }
+                                ,
+                                {
+                                    "field": "tahun.keyword"
+                                }
+
+                            ]
+                        },
+                        "aggs": {"price_stats": {"stats": {"field": "harga"}}}
                     }
                 }
             }
         )
-        # fields = {}
-        # for num, doc in enumerate(res["hits"]["hits"]):
-        #     for key, val in doc["_source"].items():
-        #         try:
-        #             fields[key] = np.append(fields[key], val)
-        #         except KeyError:
-        #             fields[key] = np.array([val])
-        # elastic_df = pd.DataFrame(fields)
-        #
-        # elastic_df.to_csv("{}.csv".format(search_term))
+
         return render_template('car_results.html', res=res)
     except:
         res = es.search(
@@ -80,46 +92,54 @@ def search_request():
             size=10000,
             body={
                 "query": {
-                        "multi_match": {
-                            "query": search_term,
-                            "fields": [
-                                "nama",
-                                "sumber",
-                                "tahun",
-                                "warna"
-                            ]
-                        }
+                    "multi_match": {
+                        "query": search_term,
+                        "fields": [
+                            'merek',
+                            "model",
+                            "tahun",
+                            "warna"
+                        ]
+                    }
                 },
                 "aggs": {
                     "price_stats": {"stats": {"field": "harga"}},
                     "agg_lokasi": {
-
                         "terms": {"field": "provinsi.keyword"},
                         "aggs": {
                             "price_stats": {"stats": {"field": "harga"}}
                         }
+                    },
+                    "model_merek_tahun": {
+                        "multi_terms": {
+                            "terms": [{
+                                "field": "merek.keyword"
+                            }, {
+                                "field": "model.keyword"
+                            },
+                                {
+                                    "field": "varian.keyword"
+                                },
+                                {
+                                    "field": "transmisi.keyword"
+                                }
+                                ,
+                                {
+                                    "field": "tahun.keyword"
+
+                                }
+
+                            ],
+                            "order": {"_term": "asc"}
+                        },
+                        "aggs": {"price_stats": {"stats": {"field": "harga"}}}
                     }
                 }
             }
         )
-        fields = {}
-        # for num, doc in enumerate(res["hits"]["hits"]):
-        #
-        #     for key, val in doc["_source"].items():
-        #         try:
-        #             fields[key] = np.append(fields[key], val)
-        #         except KeyError:
-        #             fields[key] = np.array([val])
-        # elastic_df = pd.DataFrame(fields)
-        # elastic_df.to_csv("{}.csv".format(search_term))
 
         return render_template('car_results.html', res=res)
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8001)
-
-
-
-
-
