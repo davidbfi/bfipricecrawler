@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 
 app = Flask(__name__)
-es = Elasticsearch('localhost', port=9200)
+es = Elasticsearch('http://10.121.1.8/', port=9200)
 
 
 @app.template_filter()
@@ -61,22 +61,13 @@ def search_request():
                     },
                     "model_merek_tahun": {
                         "multi_terms": {
-                            "terms": [{
-                                "field": "merek.keyword"
-                            }, {
-                                "field": "model.keyword"
-                            },
-                                {
-                                    "field": "varian.keyword"
-                                },
-                                {
-                                    "field": "transmisi.keyword"
-                                }
-                                ,
-                                {
-                                    "field": "tahun.keyword"
-                                }
-
+                            "size": 100,
+                            "terms": [
+                                {"field": "merek.keyword"},
+                                {"field": "model.keyword"},
+                                {"field": "varian.keyword"},
+                                {"field": "transmisi.keyword"},
+                                {"field": "tahun.keyword"}
                             ]
                         },
                         "aggs": {"price_stats": {"stats": {"field": "harga"}}}
@@ -84,7 +75,6 @@ def search_request():
                 }
             }
         )
-
         return render_template('car_results.html', res=res)
     except:
         res = es.search(
@@ -92,16 +82,12 @@ def search_request():
             size=10000,
             body={
                 "query": {
-                    "multi_match": {
-                        "query": search_term,
-                        "fields": [
-                            'merek',
-                            "model",
-                            "tahun",
-                            "warna"
-                        ]
+                    "combined_fields": {
+                      "query":  search_term,
+                      "fields":     ["model", "tahun", "merek"],
+                      "operator":   "and"
                     }
-                },
+                  },
                 "aggs": {
                     "price_stats": {"stats": {"field": "harga"}},
                     "agg_lokasi": {
@@ -112,32 +98,30 @@ def search_request():
                     },
                     "model_merek_tahun": {
                         "multi_terms": {
-                            "terms": [{
-                                "field": "merek.keyword"
-                            }, {
-                                "field": "model.keyword"
-                            },
+                            "size": 100,
+                            "terms": [
+                                {
+                                    "field": "merek.keyword"
+                                },
+                                {
+                                    "field": "model.keyword"
+                                },
                                 {
                                     "field": "varian.keyword"
                                 },
                                 {
                                     "field": "transmisi.keyword"
-                                }
-                                ,
+                                },
                                 {
                                     "field": "tahun.keyword"
-
                                 }
-
-                            ],
-                            "order": {"_term": "asc"}
+                            ]
                         },
                         "aggs": {"price_stats": {"stats": {"field": "harga"}}}
                     }
                 }
             }
         )
-
         return render_template('car_results.html', res=res)
 
 
