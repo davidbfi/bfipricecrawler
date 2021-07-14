@@ -112,6 +112,7 @@
                 <th>URL</th>
                 <th>Varian</th>
                 <th>Tahun</th>
+                <th>Warna</th>
                 <th>Transmisi</th>
                 <th>Harga</th>
                 <th>Source</th>
@@ -129,6 +130,7 @@
                       <td><a href="{{ hit['_source']['url'] }}">{{ hit['_source']['url'] }}</a></td>
                       <td>{{ hit['_source'] ['varian'] }}</td>
                       <td>{{ hit['_source'] ['spesifikasi_ringkas'] ['Tahun'] }}</td>
+                      <td>{{ hit['_source'] ['spesifikasi_ringkas'] ['Warna'] }}</td>
                       <td>{{ hit['_source'] ['transmisi'] }}</td>
                       <td>{{ hit['_source'] ['harga'] | currency_format }}</td>
                       <td>{{ hit['_source'] ['sumber'] }}</td>
