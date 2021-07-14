@@ -84,7 +84,7 @@ def search_request():
                 "query": {
                     "combined_fields": {
                       "query":  search_term,
-                      "fields":     ["model", "tahun", "merek"],
+                      "fields":     ["model", "tahun", "merek", "varian"],
                       "operator":   "and"
                     }
                   },
