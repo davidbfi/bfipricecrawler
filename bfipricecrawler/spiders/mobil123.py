@@ -24,7 +24,7 @@ data = get_url()
 
 class Mobil123Crawler(scrapy.Spider):
     name = 'mobil123'
-    start_urls = data[200:210]
+    start_urls = data
 
     def parse(self, response):
         links = response.xpath('/html/body/main/article/section/section[2]/section[1]/div/div/div[1]/div[1]/div/div[1]/div/a[2]/@href').extract()
@@ -50,7 +50,7 @@ class Mobil123Crawler(scrapy.Spider):
         item["varian"] = category.get('Variant') or ''
         item["transmisi"] = summary_spesifications.get('Transmisi') or ''
         item["warna"] = summary_spesifications.get('Warna') or ''
-        item["tahun"] = summary_spesifications.get('Tahun') or ''
+        item["tahun"] = summary_spesifications.get('Tahun Kendaraan') or ''
         item["harga"] = int(price) or ''
         item['provinsi'] = location.get('provinsi').strip()
         item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip()
@@ -58,6 +58,7 @@ class Mobil123Crawler(scrapy.Spider):
         item['tanggal_diperbaharui_sumber'] = updated_date.strip()
         item['spesifikasi_ringkas'] = summary_spesifications
         item['sumber'] = "Mobil123"
+        yield item
 
 
 
