@@ -29,9 +29,9 @@ class Mobil123Crawler(scrapy.Spider):
     def parse(self, response):
         links = response.xpath('/html/body/main/article/section/section[2]/section[1]/div/div/div[1]/div[1]/div/div[1]/div/a[2]/@href').extract()
         for link in links:
-            yield Request(response.url + link, callback=self.parse_kelengkapan)
+            yield Request(response.url + link, callback=self.parse_data)
 
-    def parse_kelengkapan(self, response):
+    def parse_data(self, response):
         updated_date = date_parser(response.css('span[class="u-color-muted  u-text-7  u-hide@desktop  u-margin-bottom-xs  u-block"]  ::text').extract()[0].strip())
         category = category_parser(response.css('ul[class="c-breadcrumb  u-text-7"] ::text').extract())
         name = response.css('h1[class="listing__title  u-color-dark  u-margin-bottom-xs  u-text-3  u-text-4@mobile  u-text-bold"]  ::text').extract()[0].strip()
