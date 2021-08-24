@@ -32,7 +32,7 @@ def search_request():
             transmisi = 'Manual'
 
         res = es.search(
-            index=["carsearchengine"],
+            index=["carsearchengine_v2"],
             size=10000,
             body={
                 "query": {
@@ -78,13 +78,13 @@ def search_request():
         return render_template('car_results.html', res=res)
     except:
         res = es.search(
-            index=["carsearchengine"],
+            index=["carsearchengine_v2"],
             size=10000,
             body={
                 "query": {
                     "combined_fields": {
                       "query":  search_term,
-                      "fields":     ["model", "tahun", "merek", "varian"],
+                      "fields":     ["model", "tahun", "merek", "varian", "warna"],
                       "operator":   "and"
                     }
                   },
