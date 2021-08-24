@@ -25,11 +25,14 @@ class CarItem(scrapy.Item):
     url = scrapy.Field()
     tipe_penjual = scrapy.Field()
     sumber = scrapy.Field()
+    warna = scrapy.Field()
     spesifikasi_ringkas = scrapy.Field()
     deskripsi = scrapy.Field()
     tanggal_diperbaharui_sumber = scrapy.Field()
     waktu_crawl = scrapy.Field()
     tahun = scrapy.Field()
+    kelengkapan = scrapy.Field()
+    spesifikasi_lengkap = scrapy.Field()
 
 
 class SpesifikasiItem(scrapy.Item):
