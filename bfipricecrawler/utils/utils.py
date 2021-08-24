@@ -32,16 +32,16 @@ def get_proxies():
     return proxies
 
 
-def clean_date():
-    pass
+def date_parser(eldate):
+    return eldate.split(':')[1]
 
 
-def get_location():
-    pass
-
-
-def tipe_penjual():
-    pass
+def seller_parser(elseller):
+    values = set()
+    for line in elseller:
+        if not line.strip() == "":
+            values.add(line.strip())
+    return list(values)[0]
 
 
 def list_to_dict(_list):
@@ -49,26 +49,60 @@ def list_to_dict(_list):
     for line in _list:
         if not line.strip() == "":
             ringkasan_spesifikasi_new.append(line)
-    print("SPESIFIKASI", ringkasan_spesifikasi_new, len(ringkasan_spesifikasi_new))
+
     if len(ringkasan_spesifikasi_new) == 21:
         ringkasan_spesifikasi_new = ringkasan_spesifikasi_new[0:6] + ringkasan_spesifikasi_new[9:21]
     if len(ringkasan_spesifikasi_new) == int(23):
         ringkasan_spesifikasi_new = ringkasan_spesifikasi_new[0:6] + ringkasan_spesifikasi_new[9:23]
     if len(ringkasan_spesifikasi_new) == int(25):
         ringkasan_spesifikasi_new = ringkasan_spesifikasi_new[2:8] + ringkasan_spesifikasi_new[11:]
-
     return dict(itertools.zip_longest(*[iter(ringkasan_spesifikasi_new)] * 2, fillvalue=""))
 
 
-def clean_price(price):
-    if '-' in price:
-        splitted_price = price.split('-')[0]
+def price_parser(elprice):
+    if '-' in elprice:
+        splitted_price = elprice.split('-')[0]
         cleaned_price = re.sub('[^0-9]', '', splitted_price)
     else:
-        cleaned_price = re.sub('[^0-9]', '', price)
+        cleaned_price = re.sub('[^0-9]', '', elprice)
     return cleaned_price
 
 
-def parse_location(lokasi):
-    tingkatan_wilayah = ['kecamatan', 'kabupaten_kota', 'provinsi']
-    return dict(zip(tingkatan_wilayah, lokasi))
+def location_parser(ellocation):
+    keys = ['kecamatan', 'kabupaten_kota', 'provinsi']
+    values = set()
+    for line in ellocation:
+        if not line.strip() == "":
+            values.add(line.strip())
+
+    return dict(zip(keys, list(values)))
+
+
+def category_parser(elbreadcum):
+    keys = ['Type', 'Merk', 'Model', 'Variant']
+
+    values = []
+    for line in elbreadcum:
+        if not line.strip() == "":
+            values.append(line)
+
+    category_dict = dict(zip(keys, values[1:] + ['']*(len(keys)-len(values[1:]))))
+
+    return category_dict
+
+
+def tab_specifications_parser(elspecifications):
+    specification = []
+    for line in elspecifications:
+        if not (line.strip() == "" or line.strip() == 'General' or line.strip() == 'Spesifikasi Mesin' or
+                line.strip() == 'Dimensi dan Berat' or line.strip() == 'Dimensi dan Berat' or line.strip() == 'Kinerja & Ekonomi' or line.strip() == 'Setir'):
+            specification.append(line)
+
+    return dict(itertools.zip_longest(*[iter(specification[1:])] * 2, fillvalue=""))
+
+
+def tab_equipments_parser():
+    pass
+
+
+
