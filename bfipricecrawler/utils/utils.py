@@ -101,8 +101,12 @@ def tab_specifications_parser(elspecifications):
     return dict(itertools.zip_longest(*[iter(specification[1:])] * 2, fillvalue=""))
 
 
-def tab_equipments_parser():
-    pass
+def tab_equipments_parser(elequipments):
+    equipments = []
+    for line in elequipments:
+        if not (line.strip() == "" or line.strip() == 'Comfort' or line.strip() == 'Convenience' or
+                line.strip() == 'Keamanan' or line.strip() == 'Lighting' or line.strip() == 'Entertainment'):
+            equipments.append(line)
 
-
+    return dict(itertools.zip_longest(*[iter(equipments)] * 2, fillvalue=""))
 

@@ -36,11 +36,11 @@ class Mobil123Crawler(scrapy.Spider):
         category = category_parser(response.css('ul[class="c-breadcrumb  u-text-7"] ::text').extract())
         name = response.css('h1[class="listing__title  u-color-dark  u-margin-bottom-xs  u-text-3  u-text-4@mobile  u-text-bold"]  ::text').extract()[0].strip()
         price = price_parser(response.css('div[class="listing__item-price"] ::text').extract()[1])
-        summary_spesifications = list_to_dict(response.css('div[class="u-width-4/6  u-width-1@mobile"]  ::text').extract())
+        summary_specifications = list_to_dict(response.css('div[class="u-width-4/6  u-width-1@mobile"]  ::text').extract())
         location = location_parser(response.css('span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs  c-chip--wrap "]  ::text').extract() + response.css('span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs c-chip--wrap "]  ::text').extract())
         seller_type = seller_parser(response.css('span[class="c-chip  c-chip--icon  u-rounded  c-chip--sm  u-margin-right-xxs  u-margin-bottom-xxs"] ::text').extract())
-        # spesifications_tab = tab_specifications_parser(response.css('div[id="tab-specifications"] ::text').extract())
-        # equipments_tab = list_to_dict(response.css('div[id="tab-equipments"] ::text').extract())
+        specifications_tab = tab_specifications_parser(response.css('div[id="tab-specifications"] ::text').extract())
+        equipments_tab = list_to_dict(response.css('div[id="tab-equipments"] ::text').extract())
         # seller = list_to_dict((response.css('div[id="tab-seller-notes"] ::text').extract()))
         item = CarItem()
         item["url"] = response.url
@@ -48,15 +48,17 @@ class Mobil123Crawler(scrapy.Spider):
         item["merek"] = category.get('Merk') or ''
         item["model"] = category.get('Model') or ''
         item["varian"] = category.get('Variant') or ''
-        item["transmisi"] = summary_spesifications.get('Transmisi') or ''
-        item["warna"] = summary_spesifications.get('Warna') or ''
-        item["tahun"] = summary_spesifications.get('Tahun Kendaraan') or ''
+        item["transmisi"] = summary_specifications.get('Transmisi') or ''
+        item["warna"] = summary_specifications.get('Warna') or ''
+        item["tahun"] = summary_specifications.get('Tahun Kendaraan') or ''
         item["harga"] = int(price) or ''
         item['provinsi'] = location.get('provinsi').strip()
         item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip()
         item['tipe_penjual'] = seller_type
         item['tanggal_diperbaharui_sumber'] = updated_date.strip()
-        item['spesifikasi_ringkas'] = summary_spesifications
+        item['spesifikasi_ringkas'] = summary_specifications
+        item['kelengkapan'] = equipments_tab
+        item['spesifikasi_lengkap'] = specifications_tab
         item['sumber'] = "Mobil123"
         yield item
 
