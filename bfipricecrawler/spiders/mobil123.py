@@ -1,11 +1,7 @@
-import json
-import requests
-import itertools
 import pandas as pd
 
 import scrapy
 from scrapy import Request
-from bfipricecrawler.utils.utils import ExpectedConditionModifier
 from bfipricecrawler.items import CarItem
 from bfipricecrawler.utils.utils import list_to_dict, price_parser, category_parser, date_parser, seller_parser, location_parser, tab_specifications_parser
 
@@ -52,8 +48,8 @@ class Mobil123Crawler(scrapy.Spider):
         item["warna"] = summary_specifications.get('Warna') or ''
         item["tahun"] = summary_specifications.get('Tahun Kendaraan') or ''
         item["harga"] = int(price) or ''
-        item['provinsi'] = location.get('provinsi').strip()
-        item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip()
+        item['provinsi'] = location.get('provinsi').strip() or ''
+        item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip() or ''
         item['tipe_penjual'] = seller_type
         item['tanggal_diperbaharui_sumber'] = updated_date.strip()
         item['spesifikasi_ringkas'] = summary_specifications

@@ -23,7 +23,7 @@ data = get_url()
 class CarmudiCrawler(scrapy.Spider):
     name = 'carmudi'
     urls = data
-    start_urls = data[200:210]
+    start_urls = data
 
     def parse(self, response):
         links = response.xpath(
@@ -59,9 +59,9 @@ class CarmudiCrawler(scrapy.Spider):
         item["varian"] = category.get('Variant') or ''
         item["transmisi"] = summary_specifications.get('Transmisi') or ''
         item["warna"] = summary_specifications.get('Warna') or ''
-        item["tahun"] = summary_specifications.get('Tahun') or ''
+        item["tahun"] = summary_specifications.get('Tahun Kendaraan') or ''
         item["harga"] = int(price) or ''
-        item['provinsi'] = location.get('provinsi').strip()
+        item['provinsi'] = location.get('provinsi').strip() or ''
         item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip()
         item['tipe_penjual'] = seller_type
         item['tanggal_diperbaharui_sumber'] = updated_date.strip()
@@ -69,3 +69,4 @@ class CarmudiCrawler(scrapy.Spider):
         item['kelengkapan'] = equipments_tab
         item['spesifikasi_lengkap'] = specifications_tab
         item['sumber'] = "Carmudi"
+        yield item
