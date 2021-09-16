@@ -1,6 +1,6 @@
 Flask==2.0.1
 scrapy-selenium==0.0.7
 scrapyd==1.2.1
+elasticsearch==7.12.0
 ScrapyElasticSearch==0.9.2
 beautifulsoup4==4.9.3
-
