@@ -1,3 +1,4 @@
+from datetime import datetime
 import pandas as pd
 
 import scrapy
@@ -24,6 +25,11 @@ class CarmudiCrawler(scrapy.Spider):
     name = 'carmudi'
     urls = data
     start_urls = data
+
+    custom_settings = {
+        'FEED_FORMAT': 'json',
+        'FEED_URI': './carmudi_{}.json'.format(int(datetime.now().strftime('%Y%m%d')))
+        }
 
     def parse(self, response):
         links = response.xpath(

@@ -1,3 +1,4 @@
+from datetime import datetime
 import pandas as pd
 
 import scrapy
@@ -21,6 +22,10 @@ data = get_url()
 class Mobil123Crawler(scrapy.Spider):
     name = 'mobil123'
     start_urls = data
+    custom_settings = {
+        'FEED_FORMAT': 'json',
+        'FEED_URI': './mobil123_{}.json'.format(int(datetime.now().strftime('%Y%m%d')))
+    }
 
     def parse(self, response):
         links = response.xpath('/html/body/main/article/section/section[2]/section[1]/div/div/div[1]/div[1]/div/div[1]/div/a[2]/@href').extract()
