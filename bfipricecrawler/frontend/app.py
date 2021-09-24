@@ -84,7 +84,7 @@ def search_request():
                 "query": {
                     "combined_fields": {
                       "query":  search_term,
-                      "fields":     ["model", "tahun", "merek", "varian", "warna"],
+                      "fields":     ["model", "tahun", "merek", "varian", "warna", "transmisi", "spesifikasi_ringkas.Cakupan mesin"],
                       "operator":   "and"
                     }
                   },
