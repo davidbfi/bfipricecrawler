@@ -22,15 +22,15 @@ data = get_url()
 
 class SpiderSpider(CrawlSpider):
     name = 'olx'
-    start_urls = data
+    start_urls = data[:1]
     base_url = 'https://www.olx.co.id/'
     rules = [Rule(LinkExtractor(allow='item/'),
                   callback='parse_car', follow=True)]
 
-    custom_settings = {
-        'FEED_FORMAT': 'json',
-        'FEED_URI': 'FileCrawled/Olx/olx_{}.json'.format(int(datetime.now().strftime('%Y%m%d')))
-    }
+    # custom_settings = {
+    #     'FEED_FORMAT': 'json',
+    #     'FEED_URI': 'FileCrawled/Olx/olx_{}.json'.format(int(datetime.now().strftime('%Y%m%d')))
+    # }
 
     def parse_car(self, response):
         exists = response.xpath('//div[@class="_31KwC"]').extract_first()
@@ -51,12 +51,14 @@ class SpiderSpider(CrawlSpider):
                 lokasi = olx_location(response.css('div[class="ZGU9S"] ::text').extract())
                 deskripsi = olx_descriptiton(response.css('div[class="_2e_o8"] ::text').extract())
                 varian_el = response.css('div[class="_3tLee"] ::text').extract_first().split(' ')
+                print("VARIAN", varian_el)
                 item["url"] = response.url
                 item['nama'] = response.css('div[class="_35xN1"] ::text').extract_first()
                 item['merek'] = merek
                 item['model'] = model or ""
                 item['varian'] = ' '.join(varian_el[1:-1])
                 item['transmisi'] = response.css('div[class="aOxkz"] ::text').extract()[-1]
+                item['alias_cc'] = varian_el[0]
                 item["warna"] = ""
                 item["tahun"] = tahun or ''
                 item['provinsi'] = lokasi.get('provinsi').strip() or ' '
