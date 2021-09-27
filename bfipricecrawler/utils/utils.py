@@ -45,7 +45,6 @@ def seller_parser(elseller):
 
 
 def list_to_dict(_list):
-    print(_list)
     ringkasan_spesifikasi_new = []
     for line in _list:
         if not line.strip() == "":

@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 import pandas as pd
 
@@ -21,21 +22,21 @@ data = get_url()
 
 class Mobil123Crawler(scrapy.Spider):
     name = 'mobil123'
-    start_urls = data
+    start_urls = data[:10]
     custom_settings = {
         'FEED_FORMAT': 'json',
-        'FEED_URI': './mobil123_{}.json'.format(int(datetime.now().strftime('%Y%m%d')))
+        'FEED_URI': 'FileCrawled/Mobil123/mobil123_{}.json'.format(int(datetime.now().strftime('%Y%m%d')))
     }
 
     def parse(self, response):
-        links = response.xpath('/html/body/main/article/section/section[2]/section[1]/div/div/div[1]/div[1]/div/div[1]/div/a[2]/@href').extract()
-        for link in links:
-            yield Request(response.url + link, callback=self.parse_data)
-
-    def parse_data(self, response):
         updated_date = date_parser(response.css('span[class="u-color-muted  u-text-7  u-hide@desktop  u-margin-bottom-xs  u-block"]  ::text').extract()[0].strip())
         category = category_parser(response.css('ul[class="c-breadcrumb  u-text-7"] ::text').extract())
         name = response.css('h1[class="listing__title  u-color-dark  u-margin-bottom-xs  u-text-3  u-text-4@mobile  u-text-bold"]  ::text').extract()[0].strip()
+        try:
+            cc = re.search('[0-9]+,[0-9]+', name.replace('.', ','))
+            alias_cc = cc.group().replace(',', '.')
+        except:
+            alias_cc = ''
         price = price_parser(response.css('div[class="listing__item-price"] ::text').extract()[1])
         summary_specifications = list_to_dict(response.css('div[class="u-width-4/6  u-width-1@mobile"]  ::text').extract())
         location = location_parser(response.css('span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs  c-chip--wrap "]  ::text').extract() + response.css('span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs c-chip--wrap "]  ::text').extract())
@@ -53,6 +54,7 @@ class Mobil123Crawler(scrapy.Spider):
         item["warna"] = summary_specifications.get('Warna') or ''
         item["tahun"] = summary_specifications.get('Tahun Kendaraan') or ''
         item["harga"] = int(price) or ''
+        item['alias_cc'] = alias_cc
         item['provinsi'] = location.get('provinsi').strip() or ''
         item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip() or ''
         item['tipe_penjual'] = seller_type
@@ -61,6 +63,7 @@ class Mobil123Crawler(scrapy.Spider):
         item['kelengkapan'] = equipments_tab
         item['spesifikasi_lengkap'] = specifications_tab
         item['sumber'] = "Mobil123"
+        print("ITWM", item)
         yield item
 
 
