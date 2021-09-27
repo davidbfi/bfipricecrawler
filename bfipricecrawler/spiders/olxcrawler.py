@@ -51,7 +51,6 @@ class SpiderSpider(CrawlSpider):
                 lokasi = olx_location(response.css('div[class="ZGU9S"] ::text').extract())
                 deskripsi = olx_descriptiton(response.css('div[class="_2e_o8"] ::text').extract())
                 varian_el = response.css('div[class="_3tLee"] ::text').extract_first().split(' ')
-                print("VARIAN", varian_el)
                 item["url"] = response.url
                 item['nama'] = response.css('div[class="_35xN1"] ::text').extract_first()
                 item['merek'] = merek
