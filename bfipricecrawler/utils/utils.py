@@ -45,6 +45,7 @@ def seller_parser(elseller):
 
 
 def list_to_dict(_list):
+    print(_list)
     ringkasan_spesifikasi_new = []
     for line in _list:
         if not line.strip() == "":
@@ -109,4 +110,19 @@ def tab_equipments_parser(elequipments):
             equipments.append(line)
 
     return dict(itertools.zip_longest(*[iter(equipments)] * 2, fillvalue=""))
+
+
+def olx_descriptiton(eldescription):
+    description = eldescription[1:]
+    return ' '.join(description)
+
+
+def olx_varian(elvarian):
+    return
+
+
+def olx_location(location):
+    keys = ["kecamatan", "kabupaten_kota", "provinsi"]
+    values = location[0].split(',')
+    return dict(zip(keys, list(values)))
 
