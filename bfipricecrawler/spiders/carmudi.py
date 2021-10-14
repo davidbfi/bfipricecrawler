@@ -24,7 +24,7 @@ data = get_url()
 
 class CarmudiCrawler(scrapy.Spider):
     name = 'carmudi'
-    urls = data
+    urls = data[:1]
     start_urls = urls
 
     custom_settings = {
@@ -55,7 +55,6 @@ class CarmudiCrawler(scrapy.Spider):
                                    response.css(
             'span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs c-chip--wrap "]  ::text').extract())
 
-
         seller_type = seller_parser(response.css(
             'span[class="c-chip  c-chip--icon  u-rounded  c-chip--sm  u-margin-right-xxs  u-margin-bottom-xxs"] ::text').extract())
         specifications_tab = tab_specifications_parser(response.css('div[id="tab-specifications"] ::text').extract())
@@ -71,6 +70,12 @@ class CarmudiCrawler(scrapy.Spider):
         except:
             kabupaten_kecamatan = ""
         try:
+            cakupan_mesin = summary_specifications.get('Cakupan mesin')
+            cakupan_mesin = int(cakupan_mesin.split()[0])
+        except:
+            cakupan_mesin = 0
+
+        try:
             item = CarItem()
             item["url"] = response.url
             item["nama"] = name
@@ -81,6 +86,7 @@ class CarmudiCrawler(scrapy.Spider):
             item["warna"] = summary_specifications.get('Warna') or ''
             item["tahun"] = summary_specifications.get('Tahun Kendaraan') or ''
             item["harga"] = int(price) or ''
+            item["cakupan_mesin"] = cakupan_mesin
             item['alias_cc'] = alias_cc
             item['provinsi'] = provinsi
             item['kabupaten_kecamatan'] = kabupaten_kecamatan
@@ -90,6 +96,7 @@ class CarmudiCrawler(scrapy.Spider):
             item['kelengkapan'] = equipments_tab
             item['spesifikasi_lengkap'] = specifications_tab
             item['sumber'] = "Carmudi"
+            print("ITEMT", item)
             yield item
         except Exception as e:
             print("ERRRORE", str(e), response.url)

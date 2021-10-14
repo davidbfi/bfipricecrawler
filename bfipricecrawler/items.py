@@ -19,6 +19,7 @@ class CarItem(scrapy.Item):
     varian = scrapy.Field()
     transmisi = scrapy.Field()
     lokasi = scrapy.Field()
+    cakupan_mesin = scrapy.Field()
     alias_cc = scrapy.Field()
     provinsi = scrapy.Field()
     kabupaten_kecamatan = scrapy.Field()

@@ -9,7 +9,7 @@ from bfipricecrawler.utils.utils import list_to_dict, price_parser, category_par
 
 
 def get_url():
-    data = pd.read_csv('/home/david/Desktop/NOTEBOOK/NLP/mobil123/list_url_mobil123.csv')
+    data = pd.read_csv('')
     urls = data['urls']
     urls_ = []
     for url in urls:
@@ -22,7 +22,7 @@ data = get_url()
 
 class Mobil123Crawler(scrapy.Spider):
     name = 'mobil123'
-    start_urls = data #['https://www.mobil123.com/dijual/suzuki-carry-luxury-jawa-barat-bekasi/7892926', 'https://www.mobil123.com/dijual/mazda-2-gt-jawa-timur-sidoarjo/8172978']
+    start_urls = data
     custom_settings = {
         'FEED_FORMAT': 'json',
         'FEED_URI': 'FileCrawled/Mobil123/mobil123_{}.json'.format(int(datetime.now().strftime('%Y%m%d')))
@@ -45,11 +45,15 @@ class Mobil123Crawler(scrapy.Spider):
                 'span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs  c-chip--wrap "]  ::text').extract() + response.css(
                 'span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs c-chip--wrap "]  ::text').extract() + response.css(
                 'span[class="c-chip  c-chip--sm  u-rounded  u-margin-right-xxs c-chip--wrap "]  ::text').extract())
-
             seller_type = seller_parser(response.css('span[class="c-chip  c-chip--icon  u-rounded  c-chip--sm  u-margin-right-xxs  u-margin-bottom-xxs"] ::text').extract())
             specifications_tab = tab_specifications_parser(response.css('div[id="tab-specifications"] ::text').extract())
             equipments_tab = list_to_dict(response.css('div[id="tab-equipments"] ::text').extract())
             # seller = list_to_dict((response.css('div[id="tab-seller-notes"] ::text').extract()))
+            try:
+                cakupan_mesin = summary_specifications.get('Cakupan mesin')
+                cakupan_mesin = int(cakupan_mesin.split()[0])
+            except:
+                cakupan_mesin = 0
 
             item = CarItem()
             item["url"] = response.url
@@ -61,6 +65,7 @@ class Mobil123Crawler(scrapy.Spider):
             item["warna"] = summary_specifications.get('Warna') or ''
             item["tahun"] = summary_specifications.get('Tahun Kendaraan') or ''
             item["harga"] = int(price) or ''
+            item["cakupan_mesin"] = cakupan_mesin
             item['alias_cc'] = alias_cc
             item['provinsi'] = location.get('provinsi').strip() or ''
             item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip() or ''
