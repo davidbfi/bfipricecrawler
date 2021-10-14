@@ -11,7 +11,7 @@ from bfipricecrawler.utils.utils import list_to_dict, price_parser, location_par
 
 
 def get_url():
-    data = pd.read_csv('')
+    data = pd.read_csv('/home/david/Desktop/NOTEBOOK/NLP/carmudi/list_url_carmudi.csv')
     urls = data['urls']
     urls_ = []
     for url in urls:
@@ -24,7 +24,7 @@ data = get_url()
 
 class CarmudiCrawler(scrapy.Spider):
     name = 'carmudi'
-    urls = data[:1]
+    urls = data
     start_urls = urls
 
     custom_settings = {
