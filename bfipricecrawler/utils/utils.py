@@ -69,13 +69,15 @@ def price_parser(elprice):
 
 
 def location_parser(ellocation):
-    keys = ['kecamatan', 'kabupaten_kota', 'provinsi']
+    keys = ['provinsi', 'kecamatan', 'kabupaten_kota']
     values = set()
+    list_ = []
     for line in ellocation:
         if not line.strip() == "":
             values.add(line.strip())
+            list_.append(line.strip())
 
-    return dict(zip(keys, list(values)))
+    return dict(zip(keys, list_[:-1]))
 
 
 def category_parser(elbreadcum):
@@ -124,4 +126,9 @@ def olx_location(location):
     keys = ["kecamatan", "kabupaten_kota", "provinsi"]
     values = location[0].split(',')
     return dict(zip(keys, list(values)))
+
+
+def generate_asset_code():
+    pass
+
 
