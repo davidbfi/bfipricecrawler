@@ -96,7 +96,6 @@ class CarmudiCrawler(scrapy.Spider):
             item['kelengkapan'] = equipments_tab
             item['spesifikasi_lengkap'] = specifications_tab
             item['sumber'] = "Carmudi"
-            print("ITEMT", item)
             yield item
         except Exception as e:
-            print("ERRRORE", str(e), response.url)
+            print("ERRR", str(e), response.url)

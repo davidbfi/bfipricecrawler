@@ -1,15 +1,13 @@
 import re
-from datetime import datetime
 import pandas as pd
 
 import scrapy
-from scrapy import Request
 from bfipricecrawler.items import CarItem
 from bfipricecrawler.utils.utils import list_to_dict, price_parser, category_parser, date_parser, seller_parser, location_parser, tab_specifications_parser
 
 
 def get_url():
-    data = pd.read_csv('')
+    data = pd.read_csv('/home/david/Desktop/NOTEBOOK/NLP/mobil123/list_url_mobil123.csv')
     urls = data['urls']
     urls_ = []
     for url in urls:
@@ -38,7 +36,6 @@ class Mobil123Crawler(scrapy.Spider):
         except:
             alias_cc = ''
         try:
-
             price = price_parser(response.css('h3[class="u-color-white  u-text-3  u-text-4@mobile  u-text-bold  u-margin-bottom-none  u-margin-top-xxs"] ::text').extract()[0])
             summary_specifications = list_to_dict(response.css('div[class="u-width-4/6  u-width-1@mobile"]  ::text').extract())
             location = location_parser(response.css(
@@ -54,6 +51,11 @@ class Mobil123Crawler(scrapy.Spider):
                 cakupan_mesin = int(cakupan_mesin.split()[0])
             except:
                 cakupan_mesin = 0
+            try:
+                kabupaten_kecamatan = location.get('kabupaten_kota').strip()
+            except:
+                kabupaten_kecamatan = location.get('kecamatan').strip()
+
 
             item = CarItem()
             item["url"] = response.url
@@ -68,14 +70,13 @@ class Mobil123Crawler(scrapy.Spider):
             item["cakupan_mesin"] = cakupan_mesin
             item['alias_cc'] = alias_cc
             item['provinsi'] = location.get('provinsi').strip() or ''
-            item['kabupaten_kecamatan'] = location.get('kabupaten_kota').strip() or ''
+            item['kabupaten_kecamatan'] = kabupaten_kecamatan
             item['tipe_penjual'] = seller_type
-            item['tanggal_diperbaharui_sumber'] = updated_date.strip()
+            item['tanggal_diperbaharui_sumber'] = updated_date.strip() or ''
             item['spesifikasi_ringkas'] = summary_specifications
             item['kelengkapan'] = equipments_tab
             item['spesifikasi_lengkap'] = specifications_tab
             item['sumber'] = "Mobil123"
-
             yield item
 
         except Exception as e:
