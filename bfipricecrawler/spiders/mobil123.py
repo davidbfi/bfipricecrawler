@@ -34,8 +34,9 @@ class Mobil123Crawler(scrapy.Spider):
         try:
             cc = re.search('[0-9]+,[0-9]+', name.replace('.', ','))
             alias_cc = cc.group().replace(',', '.')
+            alias_cc = int(float(alias_cc) * 1000)
         except:
-            alias_cc = ''
+            alias_cc = 0
         try:
             price = price_parser(response.css('h3[class="u-color-white  u-text-3  u-text-4@mobile  u-text-bold  u-margin-bottom-none  u-margin-top-xxs"] ::text').extract()[0])
             summary_specifications = list_to_dict(response.css('div[class="u-width-4/6  u-width-1@mobile"]  ::text').extract())
@@ -73,11 +74,12 @@ class Mobil123Crawler(scrapy.Spider):
             item['provinsi'] = location.get('provinsi').strip() or ''
             item['kabupaten_kecamatan'] = kabupaten_kecamatan
             item['tipe_penjual'] = seller_type
-            item['tanggal_diperbaharui_sumber'] = updated_date.strip() or ''
+            item['tanggal_diperbaharui_sumber'] = pd.to_datetime(updated_date)
             item['spesifikasi_ringkas'] = summary_specifications
             item['kelengkapan'] = equipments_tab
             item['spesifikasi_lengkap'] = specifications_tab
             item['sumber'] = "Mobil123"
+            item['waktu_crawl'] = datetime.now().strftime('%d-%m-%Y')
             yield item
 
         except Exception as e:

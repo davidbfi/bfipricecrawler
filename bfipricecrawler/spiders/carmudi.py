@@ -3,7 +3,6 @@ from datetime import datetime
 import pandas as pd
 
 import scrapy
-from scrapy import Request
 
 from bfipricecrawler.items import CarItem
 from bfipricecrawler.utils.utils import list_to_dict, price_parser, location_parser, date_parser, category_parser, \
@@ -36,6 +35,11 @@ class CarmudiCrawler(scrapy.Spider):
         updated_date = date_parser(response.css(
             'span[class="u-color-muted  u-text-7  u-hide@desktop  u-margin-bottom-xs  u-block"]  ::text').extract()[
                                        0].strip())
+        try:
+            print("UPDATE", updated_date)
+            new_date = pd.to_datetime(updated_date)
+        except:
+            new_date = datetime.now()
         category = category_parser(response.css('ul[class="c-breadcrumb  u-text-7"] ::text').extract())
         name = response.css(
             'h1[class="listing__title  u-color-dark  u-margin-bottom-xs  u-text-3  u-text-4@mobile  u-text-bold"]  ::text').extract()[
@@ -43,8 +47,9 @@ class CarmudiCrawler(scrapy.Spider):
         try:
             cc = re.search('[0-9]+,[0-9]+', name.replace('.', ','))
             alias_cc = cc.group().replace(',', '.')
+            alias_cc = int(float(alias_cc) * 1000)
         except:
-            alias_cc = ''
+            alias_cc = 0
         price = price_parser(response.css('h3[class="u-color-white  u-text-3  u-text-4@mobile  u-text-bold  u-margin-bottom-none  u-margin-top-xxs"] ::text').extract()[0])
         summary_specifications = list_to_dict(
             response.css('div[class="u-width-4/6  u-width-1@mobile"]  ::text').extract())
@@ -91,11 +96,14 @@ class CarmudiCrawler(scrapy.Spider):
             item['provinsi'] = provinsi
             item['kabupaten_kecamatan'] = kabupaten_kecamatan
             item['tipe_penjual'] = seller_type
-            item['tanggal_diperbaharui_sumber'] = updated_date.strip()
+            item['tanggal_diperbaharui_sumber'] = new_date
             item['spesifikasi_ringkas'] = summary_specifications
             item['kelengkapan'] = equipments_tab
             item['spesifikasi_lengkap'] = specifications_tab
             item['sumber'] = "Carmudi"
+            item['waktu_crawl'] = datetime.now().strftime('%d-%m-%Y')
             yield item
         except Exception as e:
-            print("ERRR", str(e), response.url)
+            print("ERRR", str(e), response.url, response.css(
+            'span[class="u-color-muted  u-text-7  u-hide@desktop  u-margin-bottom-xs  u-block"]  ::text').extract()[
+                                       0].strip())
