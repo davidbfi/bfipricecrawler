@@ -33,7 +33,34 @@ def get_proxies():
 
 
 def date_parser(eldate):
-    return eldate.split(':')[1]
+    str_date = eldate.split(':')[1]
+    if 'Januari' in str_date.split():
+        new_date = str_date.replace('Januari', 'Jan')
+    elif 'Februari' in str_date.split():
+        new_date = str_date.replace('Februari', 'Feb')
+    elif 'Maret' in str_date.split():
+        new_date = str_date.replace('Maret', 'Mar')
+    elif 'April' in str_date.split():
+        new_date = str_date.replace('April', 'Apr')
+    elif 'Mei' in str_date.split():
+        new_date = str_date.replace('Mei', 'May')
+    elif 'Juni' in str_date.split():
+        new_date = str_date.replace('Juni', 'Jun')
+    elif 'Juli' in str_date.split():
+        new_date = str_date.replace('Juli', 'Jul')
+    elif 'Agustus' in str_date.split():
+        new_date = str_date.replace('Agustus', 'Aug')
+    elif 'September' in str_date.split():
+        new_date = str_date.replace('September', 'Sep')
+    elif 'Oktober' in str_date.split():
+        new_date = str_date.replace('Oktober', 'Oct')
+    elif 'November' in str_date.split():
+        new_date = str_date.replace('November', 'Nov')
+    elif 'Desember' in str_date.split():
+        new_date = str_date.replace('Desember', 'Dec')
+    else:
+        new_date = ''
+    return new_date
 
 
 def seller_parser(elseller):
